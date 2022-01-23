@@ -1,52 +1,42 @@
-
 public class GenericsClass<T extends Comparable<T>> {
 
-	    public static void getMaxInt(Integer first , Integer second , Integer third ) {
-	    	Integer max = first;
-	        if (second.compareTo(max) > 0 ) {
-	            max = second;
-	        }
-	        if (third.compareTo(max) > 0){
-	            max = third;
-	        }
-	        printMax(first , second , third , max);
-	    }
-	    
-	    public static void getMaxDouble(Double first , Double second , Double third ) {
-	    	Double max = first;
-	        if (second.compareTo(max) > 0 ) {
-	            max = second;
-	        }
-	        if (third.compareTo(max) > 0){
-	            max = third;
-	        }
-	        printMax(first , second , third , max);
-	    }
-	    public static String getMaxStr(String a , String b , String c ) {
-	        String max = a ;
-	        if (b.compareTo(max) > 0 ) {
-	            max = b;
-	        }
-	        if (c.compareTo(max) > 0) {
-	            max = c;
-	        }
-	        printMax(a , b , c , max);
-	        return max;
-	    }
-	    public static <T> void printMax(T a, T b, T c, T max) {
-	        System.out.printf("Max of %s, %s and %s is %s\n",a,b,c,max);
-	    }
-	    public static void main(String[] args) {
-	        Integer firstInt = 15, secondInt = 32, thirdInt = 13;
-	        Double firstDouble = 1.2, secondDouble = 8.2, thirdDouble = 60.2;
-	        String firstString = "Virat", secondString = "Dhoni", thirdString = "Sachin";
+    T x, y, z;
 
-	        GenericsClass<Integer> Generic1 = new GenericsClass<Integer>();
-	        GenericsClass<Float>  Generic2 = new GenericsClass<Float>();        
-	        GenericsClass<String> Generic3= new GenericsClass<String>();
-	     
-	        Generic1.getMaxInt(firstInt, secondInt, thirdInt);
-	       Generic2.getMaxDouble(firstDouble, secondDouble, thirdDouble);
-	       Generic3.getMaxStr(firstString, secondString, thirdString);     
-	    }
+    public GenericsClass(T x, T y, T z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
+    public void testMaximum() {
+        GenericsClass.findMaximum(this.x, this.y, this.z);
+    }
+
+    public static <T extends Comparable<T>> void findMaximum(T firstNumber, T secondNumber, T thirdNumber) {
+        T maximumNumber;
+
+        if(firstNumber.compareTo(secondNumber)>0 && firstNumber.compareTo(thirdNumber)>0) {
+            maximumNumber = firstNumber;
+        }
+        else if(secondNumber.compareTo(firstNumber)>0 && secondNumber.compareTo(thirdNumber)>0) {
+            maximumNumber = secondNumber;
+        }
+        else {
+            maximumNumber = thirdNumber;
+        }
+        
+        System.out.println("The maximum number is: " + maximumNumber);
+    }
+
+    public static void main(String[] args) {
+
+        Integer firstNumber = 55, secondNumber = 24, thirdNumber = 17;
+        Double number1 = 1.3, number2 = 9.3, number3 = 5.1;
+        String firstString = "pranay", secondString = "nikhil", thirdString = "bhimraoji";
+
+        new GenericsClass<Integer>(firstNumber, secondNumber, thirdNumber).testMaximum();
+        new GenericsClass<Double>(number1, number2, number3).testMaximum();
+        new GenericsClass<String>(firstString, secondString, thirdString).testMaximum();
+
+    }
 }
